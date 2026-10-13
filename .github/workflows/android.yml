@@ -1,3 +1,4 @@
+
 name: RF Teknik Asistan PRO APK
 
 on:
@@ -8,6 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     permissions:
       contents: read
 
@@ -22,10 +24,9 @@ jobs:
           java-version: '17'
 
       - name: Android SDK hazirla
-        run: |
-          echo "ANDROID_HOME=$ANDROID_HOME"
-          sdkmanager --version
-          sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
+        uses: android-actions/setup-android@v3
+        with:
+          packages: 'platform-tools platforms;android-35 build-tools;35.0.0'
 
       - name: Gradle kur
         uses: gradle/actions/setup-gradle@v4
