@@ -10,8 +10,26 @@ android {
         applicationId 'com.rfteknikasistan.pro'
         minSdk 24
         targetSdk 35
-        versionCode 2
-        versionName '0.1.1'
+        versionCode 3
+        versionName '0.1.2'
+    }
+
+    signingConfigs {
+        release {
+            if (project.hasProperty('rfKeystorePath')) {
+                storeFile file(project.property('rfKeystorePath'))
+                storePassword project.property('rfStorePassword').toString()
+                keyAlias 'rf-teknik-asistan'
+                keyPassword project.property('rfKeyPassword').toString()
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+        }
     }
 
     compileOptions {
