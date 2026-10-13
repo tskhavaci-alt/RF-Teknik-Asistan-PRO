@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+
     steps:
       - name: Projeyi indir
         uses: actions/checkout@v4
@@ -20,8 +21,11 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Android SDK kur
-        uses: android-actions/setup-android@v3
+      - name: Android SDK hazirla
+        run: |
+          echo "ANDROID_HOME=$ANDROID_HOME"
+          sdkmanager --version
+          sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
 
       - name: Gradle kur
         uses: gradle/actions/setup-gradle@v4
@@ -31,10 +35,8 @@ jobs:
       - name: APK derle
         run: gradle assembleDebug --no-daemon
 
-      -       - name: Android SDK hazirla
-        run: |
-          yes | sdkmanager --licenses > /dev/null || true
-          sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
+      - name: APK dosyasini yukle
+        uses: actions/upload-artifact@v4
         with:
           name: RF-Teknik-Asistan-PRO-APK
           path: app/build/outputs/apk/debug/*.apk
