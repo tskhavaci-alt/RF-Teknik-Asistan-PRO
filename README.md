@@ -1,44 +1,48 @@
-# Kart Arıza PRO V5 — Mobil Arıza Sihirbazı
+# Kart Arıza PRO V5.1 — Akıllı Devre Takibi
 
-Telefon ekranı için hazırlanmış **tek dosyalık, çevrimdışı, Türkçe elektronik ve RF arıza arama yardımcısı**. Genel eğitim/arıza arama yöntemleri içerir; herhangi bir şirketin gerçek kartları, kurum içi ölçümleri, özel şemaları veya gizli test bilgileri bulunmaz.
+**Türkçe, telefona uygun, tek HTML dosyasında çevrimdışı çalışabilen elektronik ve RF arıza arama sihirbazı.** Yalnızca genel teknik yöntemler kullanılır; şirketlere ait özel bilgiler, dahili kart isimleri veya kurum içi test değerleri bulunmaz.
 
-## Hemen aç
-- **V5 web HTML:** [index.html](index.html)
-- **Android HTML:** [app/src/main/assets/index.html](app/src/main/assets/index.html) — birebir aynı dosya
-- **Önceki tam gelişmiş sürüm:** [V4.4 arşivi](arsiv/Kart_Ariza_PRO_V4_4.html). V4.4'teki fotoğraflı harita, çoklu hat Vaka Dosyası, hesaplayıcılar ve detaylı sözlük bu dosyada korunmuştur; **sade V5 ekranına henüz taşınmamıştır.**
+## Kullanım / dosyalar
 
-## V5'te ne değişti?
-- Dört büyük butonlu sakin ana ekran: **Kısa Devre Ara, Besleme Arızası, RF Sinyal Arızası, Ölçüm Kayıtları**
-- Alt sabit menü: **Ana Sayfa, Arıza Bul, Pin Rehberi, Kayıtlar**
-- Uzun sayfa yerine **7 adımlık, bir ekranda bir soru** yaklaşımı
-- Kullanıcının kendi kart yolunu yazabilmesi: Giriş → Koruma → Regülatör → Ferrit/0Ω → Yük. Örnek yol yalnızca düğmeyle yüklenir.
-- **Seri ve paralel eleman ayrımı:** Seri ferrit güvenle ayrılmışsa kaynak/yük tarafını sorar; paralel C ayrılmışsa kısa kayboldu mu diye sorar.
-- Sonuca göre tek ekranlık **Sıradaki Kontrol** önerisi: kaynak tarafına dön, yük kolunu incele, parça/pedleri doğrula veya bağlantıyı yeniden kontrol et.
-- **Aynı vakada yeni ölçüm**, tarihli yerel geçmiş, son vakaya devam et, JSON yedeği ve vakayı kopyalayıp sohbetten değerlendirme.
-- **12 genel pin kısaltması**: VIN, VOUT, VCC, GND, EN, PG, FB, SW, BST, RESET, CLK, NC; modele özel datasheet araması.
+- **Telefon HTML:** [index.html](index.html) — indirip tarayıcıda aç.
+- **Android uygulama içeriği:** [app/src/main/assets/index.html](app/src/main/assets/index.html) — aynı dosya; APK derlemesi GitHub Actions'ta ayrı süreçtir.
+- **V4.4 ayrıntılı özellik arşivi:** [arsiv/Kart_Ariza_PRO_V4_4.html](arsiv/Kart_Ariza_PRO_V4_4.html). V5 sade tasarımdır; V4.4'ün tüm araçları yeni ekrana taşınmamıştır.
 
-## Kullanım: 5 V hattında CC örneği
-1. Kısa Devre Ara → **5 V** → **CC**.
-2. Kart şemasından doğruladığın besleme yolunu sırayla gir veya ekranı görmek için açıkça *Örnek hat yolu yükle* seç.
-3. İnceleyeceğin seri ferrit/0Ω elemanını seç ve **Seri** işaretle.
-4. Enerji kesilmişken ve yalnızca şemadan doğrulanmışsa **Seri ayırma noktasını güvenle açtım** seçeneğini işaretle.
-5. Enerjisiz ölçümden sonra **Kısa YÜK tarafında kaldı** dersen, program sonraki yük kolundaki C, koruma elemanı ve IC besleme noktalarını kontrol etmeyi önerir.
-6. **Kaynak tarafında kaldı** seçersen geri kaynağa döner. Paralel C için farklı sonuç ekranı vardır.
-7. Ölçümünü kaydet ve sonraki noktaya geç.
+## V5.1 ile gelenler
 
-## Güvenlik ve doğru yorum
-- Program kart şemasını kendiliğinden görmez, elemanların gerçek sırasını bulmaz ve kesin arızalı parça ilan etmez.
-- **CC (Constant Current) akım sınırlama durumudur; her zaman kısa devre değildir. Düşük ohm da tek başına kısa kanıtı değildir.**
-- Direnç ve süreklilik ölçümü yalnızca **güç kapalı**, kapasitör yükleri güvenle boşaltılmış devrede yapılmalıdır.
-- Elemanın seri/paralel olup olmadığını gerçek şemadan doğrulamadan ayırma/kaldırma işlemi yapma. Bilmiyorsan uygulamadaki **Bilmiyorum / Henüz ayırmadım** seçeneklerini kullan.
-- Bilmediğin bir hatta voltaj/akım enjekte etme. Parçaları tekrar takarken değer, yön, gerilim/akım sınırı ve pad hasarını kontrol et.
-- Pin kodları **genel açıklamadır**. Entegre modeli girilince otomatik gerçek pin eşleştirmesi yapılmaz; üretici datasheet'i gereklidir.
-- Gizli işyeri devrelerini, fotoğraflarını, kodlarını ve dahili değerlerini kayıt sistemine veya açık GitHub deposuna ekleme.
+- **Gerçek hat yoluna dayalı sıradaki parça yönlendirmesi:** Senin girdiğin ve doğruladığın sıra üzerinden, güvenli şekilde ayrılmış seri noktada *yük tarafı* şüpheliyse sonraki kayıtlı elemana; *kaynak tarafı* şüpheliyse önceki elemana dönmeyi önerir. Tıklayınca bir sonraki inceleme seçilir; bağlantı türü yeniden doğrulanır.
+- **Yeni parça takınca CC tekrar başladı** ayrı akışı: değeri, yönü, lehim pedlerini, aşırı gerilim ve aynı besleme hattındaki diğer yükleri inceletir; aynı parçayı tekrar tekrar değiştirerek güç vermeyi önermez.
+- **İsteğe bağlı karşılaştırmalı ölçüm alanları:** Kaynak, yük ve sağlam kart için enerjisiz GND direncini Ω biriminde kaydeder; değerlerin düşük olmasına bakarak otomatik parça arızası ilan etmez.
+- **Ölçüm geçmişi:** Vaka kayıtlarında eski/yeni sonuçları ve notları açılabilir bir bölümde karşılaştır.
+- **Yedek geri yükleme:** V5 veya V5.1 JSON dosyasını 1 MB sınırıyla seçip mevcut vakalarla (benzersiz vaka kimliği kullanarak) birleştir. Farklı kimlikli eski kayıtlar korunur.
+- **V5 kayıt anahtarı korunur:** `kart-ariza-pro-v5` sayesinde önceki V5 vakaları erişilebilir kalır.
 
-## Depolama / sürüm uyumluluğu
-V5 vakaları tarayıcıda `kart-ariza-pro-v5` anahtarı altında saklanır ve JSON olarak dışa aktarılır. Eski V4.4 verileri yeni anahtar ile **üzerine yazılmaz**, ancak otomatik içe aktarılmaz; eski sürümün kayıtlarını gerektiğinde [V4.4 arşiv dosyasında](arsiv/Kart_Ariza_PRO_V4_4.html) açabilirsin. Tarayıcı verilerinin temizlenmesi yedeksiz kayıtları silebilir.
+## Sade telefon arayüzü
 
-## Test
-Yerel Chromium tarayıcısında 320 / 360 / 390 / 430 px mobil genişliklerde kısa devre sihirbazı, seri elemanda kaynak/yük yönlendirmesi, paralel parçayı kaldırma sonuçları, belirsiz topoloji, RF/besleme dalı, kayıt/yeniden açma, pin menüsü, yatay taşma ve sayfa JS hataları test edilmiştir. Gerçek elektronik kart üzerinde doğrulama veya Android APK kurulum testi yapılmamıştır.
+Ana sayfada yalnızca **Kısa devre ara / Besleme arızası / RF sinyal arızası / Ölçüm kayıtları** butonları var. Alt menü: **Ana Sayfa / Arıza Bul / Pin Rehberi / Kayıtlar**.
 
-**Not:** GitHub'a HTML yüklenmesi Android APK'nın yeniden üretildiği anlamına gelmez. Derleme durumunu [Actions](../../actions) sayfasında ayrıca kontrol et.
+Kısa devre sihirbazı sırasıyla:
+1. Hattı (ör. 5 V) seçer.
+2. Belirtiyi (ör. CC) sorar.
+3. Kullanıcının **gerçek şemadan doğruladığı** eleman sırasını ister. Temsili hat yalnızca *Örnek hat yolu yükle* düğmesiyle görünür.
+4. Kontrol noktasını ve elemanın seri/paralel bağlantısını sorar.
+5. Gerçekte yapılan müdahaleyi (yalnızca ölçüm, seri ayırma, paralel eleman kaldırma) sorar.
+6. Sonuç ile opsiyonel kaynak/yük/sağlam ölçümlerini alır.
+7. Kısa kontrol adımlarını, olası yönü ve varsa **bir sonraki kayıtlı elemanı** gösterir.
+
+## Güvenlik / sınırlar
+
+- **CC akım sınırıdır; kesin kısa devre kanıtı değildir. Düşük Ω da tek başına arıza kanıtı değildir.**
+- Enerjisiz direnç/süreklilik testi yap, kondansatörlerde depolanan yükü güvenle boşalt.
+- Seri elemanı yalnızca gerçekten şemadan doğrulanmış ve güvenle ayrılmışsa *ayrıldı* diye işaretle.
+- Bilinmeyen devreye rastgele voltaj/akım enjekte etme, modülleri gelişigüzel sökme.
+- Yazılım gerçek şemayı otomatik okumaz; sadece kullanıcının belirttiği yol üzerinden **koşullu teknik öneri** üretir.
+- Entegre pin adlarının anlamı geneldir. **Üretici datasheet'i olmadan gerçek ayak numarası ve işlevi kesinleştirilemez.**
+- Gizli şirket kartlarını, şemalarını, kodlarını, ölçümlerini veya fotoğraflarını bu uygulamaya girme; JSON yedeklerini paylaşırken incele.
+- Kayıtlar yerel tarayıcı/uygulama depolamasında tutulur; veriyi silmeden önce yedek al.
+
+## Doğrulama
+
+Chromium mobil emülasyonunda **320 / 360 / 390 / 430 piksel** genişliklerde; seri hat kaynak/yük dallanması, yeni elemana geçme, paralel eleman + yeni parçanın CC'ye dönmesi, not/ölçüm geçmişi, sayfa yeniden açma, JSON yedek dışa/içe alma ve yatay taşma kontrol edildi. JavaScript sayfa hatası görülmedi. Gerçek fiziksel PCB üzerinde teşhis veya gerçek APK kurulum testi yapılmadı.
+
+[GitHub Actions ile APK derleme durumunu incele](../../actions).
