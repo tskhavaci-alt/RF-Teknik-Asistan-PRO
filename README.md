@@ -1,36 +1,51 @@
-# Kart Arıza PRO V4.2 — Açıklamalı Mobil Elektronik ve RF Rehberi
+# Kart Arıza PRO V4.3 — Açıklamalı Mobil Elektronik ve RF Asistanı
 
-Türkçe, mobil arayüzlü, çevrimdışı açılabilen ve **yeni başlayanlara neyin ne olduğunu anlatarak ilerleyen** genel elektronik/RF arıza yardımcısı.
+Türkçe, tek HTML dosyasında çevrimdışı çalışabilen, telefona uygun **genel elektronik ve RF kart arıza arama yardımcı uygulaması**. Şirket, özel kart, işveren, kurum içi test değeri ya da gizli bilgi içermez.
 
-## Dosyalar
-- Tarayıcı için [index.html](index.html)
-- Android WebView için [app/src/main/assets/index.html](app/src/main/assets/index.html)
-- İki HTML aynı içeriktedir. Güncel APK için GitHub Actions derlemesi ayrıca kontrol edilmelidir.
+## Açma
+- [index.html](index.html) dosyasını telefona indirip tarayıcıda aç.
+- Android WebView uygulamasının kullandığı [app/src/main/assets/index.html](app/src/main/assets/index.html) aynı HTML içeriğini taşır.
+- HTML güncellemesi **otomatik olarak APK'nın hazır olduğu anlamına gelmez**. Derleme [GitHub Actions](../../actions) üzerinden ayrıca kontrol edilmeli.
 
-## V4.2 ile gelenler
-- **İlk açılış tanıtımı:** 4 kısa ekran; arıza seç → güvenli ölçüm → sonucu işaretle → kaydet. Tanıtım geçilebilir, bir defa gösterilir.
-- **Her zaman yardım:** üstteki **?** düğmesi veya ana sayfanın **İlk defa mı kullanıyorsun?** kutusu.
-- **Her arızada açıklama:** 8 arıza için **Bu ne demek? Neden ölçüyoruz?** metinleri.
-- **Terim sözlüğü:** Kütüphane → Terim Sözlüğü, 27 terim ve uyarı notu. Örnekler: CC, CV, GND, Ω, PLL, VCO, LO, ADC, AGC, S11, S21, VNA, spur, ripple, ferrit.
-- **Hat haritasını öğren:** Kaynak / ayırma / yük için basit örnek.
-- **Hesaplayıcı açıklaması:** Hesaplamaların otomatik arıza teşhisi olmadığı belirtilir.
-- **Önceki V4.1 özellikleri korunur:** alt mobil menü, büyük hızlı işlem butonları, sekiz arıza karar ağacı, işaretlenebilir kontrol listesi, 18 malzeme ve sekiz ölçüm cihazı rehberi, RF hesapları, fotoğraf işaretleme, kayıt ve JSON yedekleme.
+## Ana menü
+**Ana Sayfa · Arıza Bul · Kütüphane · Araçlar · Kayıtlar** — alttaki beş sabit menü. Sağ alttaki **+ Hızlı işlem** menüsünden arıza türlerine, hat haritasına, **Vaka Dosyası**na ve diğer araçlara geçilir.
 
-## Kullanım
-1. İlk açılıştaki rehberi oku veya **Şimdi geç** ile kapat.
-2. **Arıza Bul** sayfasında yaşadığın sorunu seç.
-3. Ekrandaki **Bu arıza ne demek?** açıklamasına göz at.
-4. Güvenli kontrol adımlarını yaparak işaretle.
-5. Sonucunla eşleşen butona bas; **Sıradaki kontrol** önerisini uygula.
-6. **Ölçümü not et** ile veriyi kendi cihazına kaydet; gerekirse JSON yedeği al.
+## V4.3 yenilikleri: 🗂️ Çoklu Hat Vaka Dosyası
+- Aynı incelemede **birden fazla besleme hattı** kaydet.
+- Her hat için beklenen/ölçülen gerilim (V), enerjisiz GND direnci (Ω), sağlam kart karşılaştırması, EN ve PG durumu, kontrol sırası, manuel normal/şüpheli işareti ve ölçüm notu ekle.
+- Girilen sayılardan **gerilim farkını yüzde olarak görüntüle**; bu tek başına arıza kararı değildir.
+- Şüpheli işaretlediğin hatlar ve kontrol eksikleri için **sonraki kontrolleri öner**.
+- Hat ekleme/düzenleme/silme, vaka oluşturma/silme ve temsili üç hatlı örnek vaka.
+- Seçili vakanın adını ve şüpheli/ilk hattın adını önceki **Görsel Hat Haritası**na aktar. Mevcut ölçüm noktaları otomatik silinmez.
+- Eski JSON yedeklerine uyumluluk; yeni JSON yedeklerine **railCases** alanıyla vaka/hat kayıtları dahil edilir.
 
-## Güvenlik, gizlilik ve kapsam
-- Uygulama **otomatik PCB teşhisi, şema okuma veya arızalı parça bulma** yapmaz; ölçüme göre yöntem önerir.
-- **CC**, laboratuvar kaynağının akım sınırlamaya girdiğini anlatır. **Her CC olayı kısa devre demek değildir.**
-- Direnç, diyot ve süreklilik ölçmeden önce gücü kes; kapasitörleri güvenle boşalt.
-- Gerilim sınırını bilmediğin hatta güç/akım enjekte etme; RF ve ölçüm cihazlarının giriş sınırlarını aşma.
-- Şirket, özel şema, gizli kart fotoğrafı, ürün kodu, kurum içi veri ekleme.
-- Ölçümler ve yüklenen fotoğraflar yerelde kalır; tarayıcı verileri temizlenirse yedeklenmeyen içerik kaybolabilir.
+## Önceki sürümlerden kalanlar
+- Sekiz arıza akışı: kısa devre/CC, besleme, RF sinyal, aralıklı arıza, PLL/LO, S11/S21, ADC/AGC, spur/gürültü.
+- Seri/paralel malzeme ayrımı ve kaynak/yük tarafı kontrolü.
+- Fotoğraflı görsel hat haritası, renkli manuel test noktaları.
+- 18 elektronik malzeme ve 8 ölçüm cihazı açıklaması.
+- 27 terimlik sözlük ve 4 adımlık ilk kullanım rehberi.
+- İşaretlenebilir kontrol adımları, RF/elektronik hesaplayıcılar ve eski ölçüm kayıtları.
 
-## Test
-Chromium mobil testleri 320, 360, 390 ve 430 px genişliğinde geçti: rehber ileri/geri/atla/kapat ve tekrar aç; sekiz arızadan kısa devre akışı; 27 kelime araması; hesaplayıcı; kayıt oluşturma; hat haritası örneği; alt menü ve hızlı menü. Yatay taşma veya sayfa JavaScript hatası gözlenmedi. Gerçek telefona APK kurulum testi yapılmadı.
+## Teknik ilkeler
+- **EN/Enable:** Regülatörün çalışmasını denetleyen giriş; aktif seviyesi bileşen türüne bağlıdır.
+- **PG/Power Good:** Çıkış geriliminin uygun koşullarda olup olmadığını gösteren işaret. PG pull-up, koruma ve EN durumu değerlendirilmelidir.
+- **Açılış sırası:** Çok beslemeli cihazlarda sıra önemli olabilir; her karta aynı sıra uygulanamaz.
+- **CC/CV:** Laboratuvar kaynağının akım/gerilim sınırlama kipleridir. CC görmek tek başına kısa devre kanıtı değildir.
+
+Genel araştırma kaynakları:
+- [Analog Devices — Power Supply Sequencing (AN-1311)](https://www.analog.com/en/resources/app-notes/an-1311.html)
+- [Texas Instruments — Power Good ve Enable](https://www.ti.com/document-viewer/lit/html/SSZTB93)
+- [Keysight — The Power Handbook](https://www.keysight.com/us/en/assets/3121-1101/application-notes/The-Power-Handbook.pdf)
+
+Bu kaynaklara dayalı metinler özgün Türkçe açıklamalardır; dış uygulama kodu/kılavuz metni kopyalanmamıştır.
+
+## Güvenlik ve gizlilik
+- Enerji varken direnç ve süreklilik ölçme; kondansatörlerin depoladığı yükü güvenle boşalt.
+- Şemasını ve sınırlarını bilmediğin hatta rastgele gerilim veya akım enjekte etme.
+- GND direncinin düşük olması tek başına kesin kısa devre demek değildir; şema ve sağlam kartla karşılaştır.
+- Gerilim farkı, EN/PG ve açılış sırası değerlerini **üretici toleransları ve gerçek şemayla doğrula**.
+- Kayıtlar ve isteğe bağlı görseller yalnızca tarayıcı/uygulama yerel depolamasında tutulur. JSON dosyalarını paylaşırken gizlilik kontrolü yap; tarayıcı verileri temizlenirse yedeksiz kayıtlar kaybolabilir.
+
+## Test kapsamı
+320/360/390/430 px Chromium emülasyonunda Vaka Dosyası örneği, yeni hat ekleme, düzenleme, vaka saklama, hat haritasına geçiş, JSON dışa aktarımı ve sayfa hataları kontrol edildi. Gerçek Android APK kurulum testi veya fiziksel PCB ile otomatik teşhis yapılmadı.
