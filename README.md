@@ -1,53 +1,44 @@
-# Kart Arıza PRO V4 — Elektronik ve RF Kart Arıza Asistanı
+# Kart Arıza PRO V4.1 — Mobil Elektronik ve RF Arıza Asistanı
 
-Türkçe, telefon odaklı ve **tek HTML dosyasında çevrimdışı çalışan** elektronik/RF arıza arama uygulaması. Tamamen genel yöntemleri içerir; herhangi bir kuruma veya özel kart tasarımına ait gerçek veriler bulunmaz.
+Türkçe, telefona uygun, tek HTML dosyasında internetsiz çalışabilen genel elektronik/RF arıza arama yardımcısı. Şirketlere veya gizli kart tasarımlarına ait özel bilgi içermez.
 
-## Uygulamayı aç
+## HTML'de incele
+- Tarayıcı: [index.html](index.html)
+- Android WebView kaynağı: [app/src/main/assets/index.html](app/src/main/assets/index.html)
+- Bu iki HTML birebir aynı içerikle güncellenir. GitHub Actions APK derlemesi ayrı bir işlemdir.
 
-- **HTML:** [index.html](index.html) dosyasını telefona indirip tarayıcıda aç.
-- **Android kaynağı:** [app/src/main/assets/index.html](app/src/main/assets/index.html) aynı içeriği taşır.
-- **APK:** Kodların güncellenmesi ile APK derlemesi ayrı işlemlerdir. Güncel APK'nın başarıyla oluşturulup oluşturulmadığı GitHub Actions üzerinden kontrol edilmelidir.
+## V4.1 — uygulama gibi menü
+- Altta 5 sabit ana menü: **Ana Sayfa / Arıza Bul / Kütüphane / Araçlar / Kayıtlar**
+- Sağ altta **＋ Hızlı İşlem**: 8 büyük buton (kısa devre, besleme, RF, hat haritası, ölçüm ekle, hesaplayıcı, malzeme ara, kayıt/yedek)
+- Üstte yardım ve hızlı menü butonları
+- Ana ekranda daha büyük erişim butonları, 6 ana kısayol kartı ve 6 yatay hızlı arıza düğmesi
+- Teşhis adımlarında işaretlenebilir kontrol listesi, tamamlanma ilerlemesi ve sıfırlama
+- Açılır menüde klavyeden Escape ile kapatma ve dokunmatik telefon düzeni
 
-## Telefon menüsü
+## V4'ten korunan özellikler
+- 8 arıza türü ve sonucu değiştikçe değişen kontrol önerileri
+- Kısa devre için seri/paralel malzeme ve kaynak/yük ayrımı
+- Kullanıcının belirlediği ölçüm noktalarıyla görsel hat haritası
+- Kart fotoğrafı ekleme ve üzerine manuel nokta işaretleme
+- 18 elektronik malzeme rehberi, 8 ölçüm cihazı rehberi ve RF hesaplayıcıları
+- Ölçülen/beklenen değer kaydı, yerel arşiv, JSON yedek dışa/içe aktarma
 
-- **Ana Sayfa** — hızlı arıza girişleri.
-- **Arıza Bul** — 8 arıza başlığında ölçüm sonucuna göre değişen adımlar.
-- **Hat Haritası (V4, Ana Sayfa veya Arıza Bul içinden)** — kullanıcı tanımlı kaynak / seri ayırma / yük noktaları, ölçülen ve beklenen değerler, manuel şüpheli/normal işaretleri ve kontrol önerileri.
-- **Kütüphane** — 18 elektronik bileşen, 8 ölçüm cihazı, 10'dan fazla yöntem, yabancı kaynakların özgün Türkçe özetleri.
-- **Araçlar** — dBm/mW, kazanç, dalga boyu, Ohm, RC/LC, S11→VSWR hesapları.
-- **Kayıtlar** — ölçüm incelemeleri ve JSON yedek alma / geri yükleme.
+## Kullanım
+1. Ana sayfada **Arıza incele** veya **＋ Hızlı İşlem** düğmesine bas.
+2. Arıza türünü seç.
+3. Güvenli ilk kontrolleri yap; her kontrolü tamamladığında işaretle.
+4. Gözlemine uyan sonucu seç; sonraki kontrol önerisini oku.
+5. Ölçümlerini kaydet. Gerekirse **Hat Haritası**nda kaynak/ayırma/yük noktalarını karşılaştır.
 
-## V4 — görsel hat haritası
-
-1. **Kaynak → Seri ayırma → Yük** temsili görünümündeki bölümünü seç.
-2. Ölçüm noktasını, ölçülen değeri, referans değerini ve **manuel** yorumunu kaydet.
-3. Şemadan doğrulanmış seri ayırmanın gerçekten açılıp iki tarafın enerjisiz ölçüldüğünü yalnızca doğruysa işaretle.
-4. Program, girilen değerlendirmelere göre sonraki **kontrol bölgesini** önerir; otomatik arızalı parça teşhisi yapmaz.
-5. İstersen genel kart fotoğrafını seç; fotoğrafı telefonda küçültür ve görsel üzerine etiketli test noktaları işaretleyebilirsin.
-6. Tüm haritayı (görsel dâhil) **JSON yedeğine** ekleyebilir, yine uygulamadan geri yükleyebilirsin.
-
-**Örnek yükle:** V4 Hat Haritası ekranındaki **Örnek hat yükle** düğmesi üç noktalı temsili bir arıza gösterir. Örnek direnç değerleri gerçek bir karttan alınmamıştır.
-
-## Veri ve güvenlik
-
-- İnternet bağlantısı şart değildir; fotoğraflar ve ölçümler kendi cihazında tutulur, bir sunucuya otomatik gönderilmez.
-- Bu HTML gizli veri saklamak için onaylanmış kurumsal bir araç değildir. **Özel kart fotoğrafı, şirket şeması, gizli ölçüm veya kurum içi teknik bilgiler eklemeyin**, özellikle JSON yedeklerini paylaşmayın.
-- Yerel tarayıcı / uygulama verisi silinirse yedeklenmeyen kayıtlar kaybolabilir.
-- Direnç / süreklilik ölçmeden önce enerji kesilmeli, kondansatörler güvenli boşaltılmalıdır.
-- Düşük direnç her zaman kısa devre değildir; kart topolojisi, ölçüm sınırları ve sağlam karşılaştırma gerekir.
-- Bilinmeyen hatta rastgele akım/voltaj enjekte etmeyin. Osiloskop toprak bağlantısını şebekeye göre tehlikeli noktalara bağlamayın.
-
-## Araştırma temeli
-
-- [Analog Devices — Locating Shorts on Power Planes of Multi-Layer PCBs](https://www.analog.com/en/resources/technical-articles/locating-shorts-on-power-planes-of-multi-layer-pcbs.html): çok katmanlı kartlarda hat/kısa arama güçlüğü.
-- [Tektronix — Probing Techniques for Accurate Voltage Measurements](https://www.tek.com/en/documents/application-note/probing-techniques-accurate-voltage-measurements-power-converters-oscillos): prob-toprak bağlantısı, indüktans ve yalancı dalga şekli.
-- [Analog Devices — How to Protect Your Power System Designs Against Faults](https://www.analog.com/en/resources/analog-dialogue/raqs/raq-issue-216.html): aşırı akım, gerilim ve ısıl koruma.
-- Önceki PLL, VNA, ADC, RF referansları uygulama içindeki kaynaklar bölümündedir.
+## Güvenlik ve gizlilik
+- Bu yazılım otomatik arızalı eleman teşhisi veya gerçek şema analizi yapmaz.
+- **Düşük ohm değeri tek başına kısa devre kanıtı değildir.**
+- Direnç/diyot/süreklilik ölçerken kartın enerjisini kes; depolanan enerjiyi güvenle boşalt.
+- Bilinmeyen hatta rastgele voltaj veya akım uygulama; RF/ölçü aletlerinin giriş sınırlarına uy.
+- Gerçek şirket/kart fotoğrafı, gizli şema, dahili test verisi veya diğer özel bilgileri uygulamaya ve açık GitHub deposuna ekleme.
+- Ölçümler ve isteğe bağlı fotoğraflar **yalnızca tarayıcı / uygulama yerel depolamasında** tutulur. Uygulama verilerini silmeden önce JSON yedeği al.
 
 ## Test kapsamı
+Chromium üzerinde 320, 360, 390 ve 430 piksel ekranlarda: beşli alt menü, sekizli hızlı işlem menüsü, açma/kapatma, sekiz seçenek, teşhis kontrol listesi ve sıfırlama, ölçüm kaydı, V4 hat haritası, fotoğraf işareti, yedekleme ve hesaplayıcı regresyon testleri yapıldı. Testlerde yatay taşma ve JavaScript sayfa hatası görülmedi.
 
-Chromium mobil emülasyonunda 320/360/390 piksel genişlik, gezinme, üçlü hat haritası, ayrım doğrulaması, manuel ölçüm ekleme, fotoğraf işaretleme, JSON dışa/geri alma, eski arıza akışı ve hesaplayıcılar kontrol edildi. Gerçek Android APK kurulum testi ve fiziksel kart üzerinde otomatik teşhis **yapılmadı**.
-
-## Sürüm yolu
-
-V3 ana fonksiyonlar korunarak V4 eklenmiştir. Sonraki adaylar: vakaya özel birden fazla hat, kayıtları karşılaştırmalı gösterme ve dışa aktarılabilir teknik rapor. Bunlar henüz mevcut değildir.
+Gerçek Android APK kurulum testi yapılmadı; GitHub'a HTML yüklemek APK'nın başarıyla derlendiği anlamına gelmez.
