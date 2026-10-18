@@ -1,51 +1,46 @@
-# Kart Arıza PRO V4.3 — Açıklamalı Mobil Elektronik ve RF Asistanı
+# Kart Arıza PRO V4.4 — 5 V Kısa Devre / Entegre Pin Rehberi
 
-Türkçe, tek HTML dosyasında çevrimdışı çalışabilen, telefona uygun **genel elektronik ve RF kart arıza arama yardımcı uygulaması**. Şirket, özel kart, işveren, kurum içi test değeri ya da gizli bilgi içermez.
+**Mobil uyumlu, çevrimdışı çalışabilen, tamamen genel elektronik ve RF kart arıza arama uygulaması.** Şirket, gerçek kart tasarımı, kurum içi test değerleri ve gizli içerik bulunmaz.
 
-## Açma
-- [index.html](index.html) dosyasını telefona indirip tarayıcıda aç.
-- Android WebView uygulamasının kullandığı [app/src/main/assets/index.html](app/src/main/assets/index.html) aynı HTML içeriğini taşır.
-- HTML güncellemesi **otomatik olarak APK'nın hazır olduğu anlamına gelmez**. Derleme [GitHub Actions](../../actions) üzerinden ayrıca kontrol edilmeli.
+## Dosyalar
 
-## Ana menü
-**Ana Sayfa · Arıza Bul · Kütüphane · Araçlar · Kayıtlar** — alttaki beş sabit menü. Sağ alttaki **+ Hızlı işlem** menüsünden arıza türlerine, hat haritasına, **Vaka Dosyası**na ve diğer araçlara geçilir.
+- [index.html](index.html) — tek dosyalık mobil web arayüzü
+- [app/src/main/assets/index.html](app/src/main/assets/index.html) — Android WebView'in kullandığı aynı HTML
+- [GitHub Actions](../../actions) — Android APK derleme işlemleri; HTML yüklenmesi yeni APK'nın oluştuğunu doğrulamaz.
 
-## V4.3 yenilikleri: 🗂️ Çoklu Hat Vaka Dosyası
-- Aynı incelemede **birden fazla besleme hattı** kaydet.
-- Her hat için beklenen/ölçülen gerilim (V), enerjisiz GND direnci (Ω), sağlam kart karşılaştırması, EN ve PG durumu, kontrol sırası, manuel normal/şüpheli işareti ve ölçüm notu ekle.
-- Girilen sayılardan **gerilim farkını yüzde olarak görüntüle**; bu tek başına arıza kararı değildir.
-- Şüpheli işaretlediğin hatlar ve kontrol eksikleri için **sonraki kontrolleri öner**.
-- Hat ekleme/düzenleme/silme, vaka oluşturma/silme ve temsili üç hatlı örnek vaka.
-- Seçili vakanın adını ve şüpheli/ilk hattın adını önceki **Görsel Hat Haritası**na aktar. Mevcut ölçüm noktaları otomatik silinmez.
-- Eski JSON yedeklerine uyumluluk; yeni JSON yedeklerine **railCases** alanıyla vaka/hat kayıtları dahil edilir.
+## V4.4: 5 V Kısa Devre Yol Gösterici
 
-## Önceki sürümlerden kalanlar
-- Sekiz arıza akışı: kısa devre/CC, besleme, RF sinyal, aralıklı arıza, PLL/LO, S11/S21, ADC/AGC, spur/gürültü.
-- Seri/paralel malzeme ayrımı ve kaynak/yük tarafı kontrolü.
-- Fotoğraflı görsel hat haritası, renkli manuel test noktaları.
-- 18 elektronik malzeme ve 8 ölçüm cihazı açıklaması.
-- 27 terimlik sözlük ve 4 adımlık ilk kullanım rehberi.
-- İşaretlenebilir kontrol adımları, RF/elektronik hesaplayıcılar ve eski ölçüm kayıtları.
+Ana Sayfa veya **+ Hızlı İşlem → 5 V kısa / Entegre pini** üzerinden erişilir.
 
-## Teknik ilkeler
-- **EN/Enable:** Regülatörün çalışmasını denetleyen giriş; aktif seviyesi bileşen türüne bağlıdır.
-- **PG/Power Good:** Çıkış geriliminin uygun koşullarda olup olmadığını gösteren işaret. PG pull-up, koruma ve EN durumu değerlendirilmelidir.
-- **Açılış sırası:** Çok beslemeli cihazlarda sıra önemli olabilir; her karta aynı sıra uygulanamaz.
-- **CC/CV:** Laboratuvar kaynağının akım/gerilim sınırlama kipleridir. CC görmek tek başına kısa devre kanıtı değildir.
+1. Hattı yaz: 5 V varsayılandır, farklı beslemeler de incelenebilir.
+2. Sorunu seç: düşük GND direnci, CC, gerilim çökmesi veya belirsiz.
+3. Kaynak mı yük mü şüpheli, seri ayırma gerçekten şemadan doğrulanıp açıldı mı seç.
+4. Gerçek ölçüm ve sağlam kart referansını ekle.
+5. Varsa **entegre kodunu** yaz ve şüpheli pini seç: **VIN, VOUT, VCC/VDD, GND, EN, PG, FB, SW, BST, RESET, CLK, SDA, CS, NC, FAULT, ILIM**.
+6. Ölçümde ne gördüğünü seç; program pinin **genel** anlamını ve sıradaki ölçüm bölgesini açıklar.
+7. **Datasheet ara**: yazılan model için çevrimiçi üretici belgesi araması açar (internet gerekir).
+8. **Soru metnini kopyala**: gözlemlerden düzenlenmiş bir soru hazırlayıp ChatGPT sohbetine yapıştırmana yardımcı olur; otomatik olarak sohbet göndermez.
+9. Ölçüm geçmişini yerelde sakla. JSON dışa ve geri yükleme bu yeni **traceChecks** alanını da kapsar.
 
-Genel araştırma kaynakları:
-- [Analog Devices — Power Supply Sequencing (AN-1311)](https://www.analog.com/en/resources/app-notes/an-1311.html)
-- [Texas Instruments — Power Good ve Enable](https://www.ti.com/document-viewer/lit/html/SSZTB93)
-- [Keysight — The Power Handbook](https://www.keysight.com/us/en/assets/3121-1101/application-notes/The-Power-Handbook.pdf)
+### Teşhis sınırları
+Uygulama **belirtilen entegre koduna ait gerçek pin numarasını veya farklı üretici varyantının pin görevini otomatik tespit etmez**. Üretici datasheet'indeki *Pin Functions/Pin Description* tablosu şarttır. Aynı hatta bağlı bir entegre besleme pinindeki düşük ohm, tek başına entegre kısa devresi değildir. GND'nin GND'ye kısa olması normaldir. CC kaynağın akım sınırına ulaştığını gösterir, kesin kısa değildir.
 
-Bu kaynaklara dayalı metinler özgün Türkçe açıklamalardır; dış uygulama kodu/kılavuz metni kopyalanmamıştır.
+### Ölçüm güvenliği
+- Direnç/süreklilik/diyot için **enerjiyi kesip kondansatörleri güvenli boşalt**.
+- Şemadan doğrulanmamış seri noktayı ayırmış gibi yorumlama; rastgele sökme.
+- Bilinmeyen hatta gerilim/akım enjekte etme. Kısa devre bulmak için aşırı güç uygulama.
+- Sınırlarını bilmeden MOSFET, SW düğümü, PG pull-up veya IC pinine harici gerilim bağlama.
+- Uygulama verileri yalnızca cihazda tutulur; kayıt/yedeklere gizli kurum verisi yazma.
 
-## Güvenlik ve gizlilik
-- Enerji varken direnç ve süreklilik ölçme; kondansatörlerin depoladığı yükü güvenle boşalt.
-- Şemasını ve sınırlarını bilmediğin hatta rastgele gerilim veya akım enjekte etme.
-- GND direncinin düşük olması tek başına kesin kısa devre demek değildir; şema ve sağlam kartla karşılaştır.
-- Gerilim farkı, EN/PG ve açılış sırası değerlerini **üretici toleransları ve gerçek şemayla doğrula**.
-- Kayıtlar ve isteğe bağlı görseller yalnızca tarayıcı/uygulama yerel depolamasında tutulur. JSON dosyalarını paylaşırken gizlilik kontrolü yap; tarayıcı verileri temizlenirse yedeksiz kayıtlar kaybolabilir.
+## Korunan V4.3 özellikleri
+Beşli alt menü, hızlı işlem kısayolları, sekiz arıza karar ağacı, adım kontrol listesi, görsel hat haritası ve fotoğraf işaretleri, çoklu besleme Vaka Dosyası, 18 malzeme/8 ölçüm cihazı bilgisi, 27 terimlik sözlük, RF hesaplayıcılar, ilk açılış rehberi, kayıt ve JSON yedek.
 
-## Test kapsamı
-320/360/390/430 px Chromium emülasyonunda Vaka Dosyası örneği, yeni hat ekleme, düzenleme, vaka saklama, hat haritasına geçiş, JSON dışa aktarımı ve sayfa hataları kontrol edildi. Gerçek Android APK kurulum testi veya fiziksel PCB ile otomatik teşhis yapılmadı.
+## Genel referanslar
+- [Texas Instruments — LMR60406-Q1 datasheet, Pin Functions](https://www.ti.com/lit/pdf/SNAS871): VIN, EN, PG, FB, SW, BOOT gibi pinlerin **örnek bir regülatördeki** görevleri.
+- [Texas Instruments — LMR664xx datasheet](https://www.ti.com/mx/lit/gpn/lmr66410): bazı pinlerin çok işlevli olabileceği ve VCC/NC farkları.
+- [Analog Devices — Locating Shorts on Power Planes of Multi-Layer PCBs](https://www.analog.com/cn/resources/technical-articles/locating-shorts-on-power-planes-of-multi-layer-pcbs.html): karmaşık çok katmanlı kartlarda kısa arama ve zarar vermeme ilkeleri.
+
+Belge metinleri kopyalanmamıştır. Programdaki öneriler özgün Türkçe genel açıklamalardır.
+
+## Test
+Chromium telefon görünümünde 320, 360, 390 ve 430 px: etkileşimli kaynak/yük ayrımı, VIN/GND/PG pin açıklaması, ölçüm değiştirince yönlendirmenin değişmesi, kayıt saklama, sayfayı yeniden açma, JSON yedek dışa çıkarma, eski alt menüler, yatay taşma ve JS hataları kontrol edilmiştir. Gerçek donanımda teşhis ve Android APK kurulumu yapılmadı.
