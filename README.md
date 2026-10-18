@@ -1,44 +1,36 @@
-# Kart Arıza PRO V4.1 — Mobil Elektronik ve RF Arıza Asistanı
+# Kart Arıza PRO V4.2 — Açıklamalı Mobil Elektronik ve RF Rehberi
 
-Türkçe, telefona uygun, tek HTML dosyasında internetsiz çalışabilen genel elektronik/RF arıza arama yardımcısı. Şirketlere veya gizli kart tasarımlarına ait özel bilgi içermez.
+Türkçe, mobil arayüzlü, çevrimdışı açılabilen ve **yeni başlayanlara neyin ne olduğunu anlatarak ilerleyen** genel elektronik/RF arıza yardımcısı.
 
-## HTML'de incele
-- Tarayıcı: [index.html](index.html)
-- Android WebView kaynağı: [app/src/main/assets/index.html](app/src/main/assets/index.html)
-- Bu iki HTML birebir aynı içerikle güncellenir. GitHub Actions APK derlemesi ayrı bir işlemdir.
+## Dosyalar
+- Tarayıcı için [index.html](index.html)
+- Android WebView için [app/src/main/assets/index.html](app/src/main/assets/index.html)
+- İki HTML aynı içeriktedir. Güncel APK için GitHub Actions derlemesi ayrıca kontrol edilmelidir.
 
-## V4.1 — uygulama gibi menü
-- Altta 5 sabit ana menü: **Ana Sayfa / Arıza Bul / Kütüphane / Araçlar / Kayıtlar**
-- Sağ altta **＋ Hızlı İşlem**: 8 büyük buton (kısa devre, besleme, RF, hat haritası, ölçüm ekle, hesaplayıcı, malzeme ara, kayıt/yedek)
-- Üstte yardım ve hızlı menü butonları
-- Ana ekranda daha büyük erişim butonları, 6 ana kısayol kartı ve 6 yatay hızlı arıza düğmesi
-- Teşhis adımlarında işaretlenebilir kontrol listesi, tamamlanma ilerlemesi ve sıfırlama
-- Açılır menüde klavyeden Escape ile kapatma ve dokunmatik telefon düzeni
-
-## V4'ten korunan özellikler
-- 8 arıza türü ve sonucu değiştikçe değişen kontrol önerileri
-- Kısa devre için seri/paralel malzeme ve kaynak/yük ayrımı
-- Kullanıcının belirlediği ölçüm noktalarıyla görsel hat haritası
-- Kart fotoğrafı ekleme ve üzerine manuel nokta işaretleme
-- 18 elektronik malzeme rehberi, 8 ölçüm cihazı rehberi ve RF hesaplayıcıları
-- Ölçülen/beklenen değer kaydı, yerel arşiv, JSON yedek dışa/içe aktarma
+## V4.2 ile gelenler
+- **İlk açılış tanıtımı:** 4 kısa ekran; arıza seç → güvenli ölçüm → sonucu işaretle → kaydet. Tanıtım geçilebilir, bir defa gösterilir.
+- **Her zaman yardım:** üstteki **?** düğmesi veya ana sayfanın **İlk defa mı kullanıyorsun?** kutusu.
+- **Her arızada açıklama:** 8 arıza için **Bu ne demek? Neden ölçüyoruz?** metinleri.
+- **Terim sözlüğü:** Kütüphane → Terim Sözlüğü, 27 terim ve uyarı notu. Örnekler: CC, CV, GND, Ω, PLL, VCO, LO, ADC, AGC, S11, S21, VNA, spur, ripple, ferrit.
+- **Hat haritasını öğren:** Kaynak / ayırma / yük için basit örnek.
+- **Hesaplayıcı açıklaması:** Hesaplamaların otomatik arıza teşhisi olmadığı belirtilir.
+- **Önceki V4.1 özellikleri korunur:** alt mobil menü, büyük hızlı işlem butonları, sekiz arıza karar ağacı, işaretlenebilir kontrol listesi, 18 malzeme ve sekiz ölçüm cihazı rehberi, RF hesapları, fotoğraf işaretleme, kayıt ve JSON yedekleme.
 
 ## Kullanım
-1. Ana sayfada **Arıza incele** veya **＋ Hızlı İşlem** düğmesine bas.
-2. Arıza türünü seç.
-3. Güvenli ilk kontrolleri yap; her kontrolü tamamladığında işaretle.
-4. Gözlemine uyan sonucu seç; sonraki kontrol önerisini oku.
-5. Ölçümlerini kaydet. Gerekirse **Hat Haritası**nda kaynak/ayırma/yük noktalarını karşılaştır.
+1. İlk açılıştaki rehberi oku veya **Şimdi geç** ile kapat.
+2. **Arıza Bul** sayfasında yaşadığın sorunu seç.
+3. Ekrandaki **Bu arıza ne demek?** açıklamasına göz at.
+4. Güvenli kontrol adımlarını yaparak işaretle.
+5. Sonucunla eşleşen butona bas; **Sıradaki kontrol** önerisini uygula.
+6. **Ölçümü not et** ile veriyi kendi cihazına kaydet; gerekirse JSON yedeği al.
 
-## Güvenlik ve gizlilik
-- Bu yazılım otomatik arızalı eleman teşhisi veya gerçek şema analizi yapmaz.
-- **Düşük ohm değeri tek başına kısa devre kanıtı değildir.**
-- Direnç/diyot/süreklilik ölçerken kartın enerjisini kes; depolanan enerjiyi güvenle boşalt.
-- Bilinmeyen hatta rastgele voltaj veya akım uygulama; RF/ölçü aletlerinin giriş sınırlarına uy.
-- Gerçek şirket/kart fotoğrafı, gizli şema, dahili test verisi veya diğer özel bilgileri uygulamaya ve açık GitHub deposuna ekleme.
-- Ölçümler ve isteğe bağlı fotoğraflar **yalnızca tarayıcı / uygulama yerel depolamasında** tutulur. Uygulama verilerini silmeden önce JSON yedeği al.
+## Güvenlik, gizlilik ve kapsam
+- Uygulama **otomatik PCB teşhisi, şema okuma veya arızalı parça bulma** yapmaz; ölçüme göre yöntem önerir.
+- **CC**, laboratuvar kaynağının akım sınırlamaya girdiğini anlatır. **Her CC olayı kısa devre demek değildir.**
+- Direnç, diyot ve süreklilik ölçmeden önce gücü kes; kapasitörleri güvenle boşalt.
+- Gerilim sınırını bilmediğin hatta güç/akım enjekte etme; RF ve ölçüm cihazlarının giriş sınırlarını aşma.
+- Şirket, özel şema, gizli kart fotoğrafı, ürün kodu, kurum içi veri ekleme.
+- Ölçümler ve yüklenen fotoğraflar yerelde kalır; tarayıcı verileri temizlenirse yedeklenmeyen içerik kaybolabilir.
 
-## Test kapsamı
-Chromium üzerinde 320, 360, 390 ve 430 piksel ekranlarda: beşli alt menü, sekizli hızlı işlem menüsü, açma/kapatma, sekiz seçenek, teşhis kontrol listesi ve sıfırlama, ölçüm kaydı, V4 hat haritası, fotoğraf işareti, yedekleme ve hesaplayıcı regresyon testleri yapıldı. Testlerde yatay taşma ve JavaScript sayfa hatası görülmedi.
-
-Gerçek Android APK kurulum testi yapılmadı; GitHub'a HTML yüklemek APK'nın başarıyla derlendiği anlamına gelmez.
+## Test
+Chromium mobil testleri 320, 360, 390 ve 430 px genişliğinde geçti: rehber ileri/geri/atla/kapat ve tekrar aç; sekiz arızadan kısa devre akışı; 27 kelime araması; hesaplayıcı; kayıt oluşturma; hat haritası örneği; alt menü ve hızlı menü. Yatay taşma veya sayfa JavaScript hatası gözlenmedi. Gerçek telefona APK kurulum testi yapılmadı.
